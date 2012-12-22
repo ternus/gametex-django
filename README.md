@@ -1,10 +1,10 @@
-gametex-django
+GameTeX Django
 ==============
+
+A Django app for GameTeX integration (beta).  Provides trivial integration with GameTeX classes.
 
 Getting started
 ---------------
-
-A Django app for GameTeX integration (beta).  Provides trivial integration with GameTeX classes.
 
 To install:
 
@@ -55,9 +55,16 @@ access these like normal:
     u'CompSci Data'
     >>> g2.hintreq
     u'Cryptography 2'
+    >>> g2.name = 'CS Data'
+    >>> g2.name
+    u'CS Data'
 
 In case your field has spaces in it, you can reference it with the
-'field' method of GameTeXObject:
+'field' and 'set_field' methods of GameTeXObject:
 
     >>> g.field('Combat Rating')
     u'2'
+    >>> g.set_field('Combat Rating', '4')
+    >>> g.field('Combat Rating')
+    u'4'
+
