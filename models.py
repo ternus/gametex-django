@@ -38,6 +38,12 @@ class GameTeXObject(models.Model):
         """
         return self.field(item)
 
+    def __setattr__(self, key, value):
+        try:
+            self.set_field(key, value)
+        except AttributeError:
+            return super(GameTeXObject, self).__setattr__(key, value)
+
     def field(self, item):
         flds = GameTeXField.objects.filter(name=item)
         if len(flds):
@@ -45,6 +51,14 @@ class GameTeXObject(models.Model):
             if len(vals):
                 return vals[0].value
         raise AttributeError
+
+    def set_field(self, key, value):
+        try:
+            v = GameTeXFieldValue.objects.get(field__name=key,object=self)
+            v.value = value
+            v.save()
+        except:
+            raise AttributeError
 
     @classmethod
     def bc(cls, clname):
