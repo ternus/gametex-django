@@ -6,13 +6,13 @@ class GameTeXClass(models.Model):
     name = models.CharField(max_length=256, unique=True, primary_key=True)
 
     def __unicode__(self):
-        return "GTO: %s" % self.name
+        return self.name
 
 class GameTeXField(models.Model):
     name = models.CharField(max_length=256, unique=True, primary_key=True)
 
     def __unicode__(self):
-        return "GTF: %s" % self.name
+        return self.name
 
 class GameTeXFieldValue(models.Model):
     field = models.ForeignKey('GameTeXField')
@@ -20,7 +20,7 @@ class GameTeXFieldValue(models.Model):
     value = models.CharField(max_length=256)
 
     def __unicode__(self):
-        return "GTFV: %s %s:%s" % (self.object, self.field, self.value)
+        return "%s %s:%s" % (self.object, self.field, self.value)
 
 class GameTeXObject(models.Model):
     macro = models.CharField(max_length=256)
@@ -29,7 +29,7 @@ class GameTeXObject(models.Model):
     custom_fields = models.ManyToManyField(GameTeXField, through=GameTeXFieldValue)
 
     def __unicode__(self):
-        return "GTO: %s [%s]" % (self.macro, self.name)
+        return "%s [%s]" % (self.macro, self.name)
 
     def __getattr__(self, item):
         """
