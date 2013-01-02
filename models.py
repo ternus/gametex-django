@@ -23,7 +23,7 @@ class GameTeXFieldValue(models.Model):
         return "%s %s:%s" % (self.object, self.field, self.value)
 
 class GameTeXObject(models.Model):
-    macro = models.CharField(max_length=256)
+    macro = models.CharField(max_length=256, unique=True, primary_key=True)
     name = models.CharField(max_length=256)
     classes = models.ManyToManyField(GameTeXClass)
     custom_fields = models.ManyToManyField(GameTeXField, through=GameTeXFieldValue)
@@ -34,7 +34,7 @@ class GameTeXObject(models.Model):
     def __getattr__(self, item):
         """
         Allows access to custom fields through dot syntax
-        e.g.
+        e.g. gto.market
         """
         return self.field(item)
 
@@ -43,6 +43,9 @@ class GameTeXObject(models.Model):
             self.set_field(key, value)
         except AttributeError:
             return super(GameTeXObject, self).__setattr__(key, value)
+
+    def has_field(self, field):
+        return GameTeXFieldValue.objects.filter(object=self, field=field).exists()
 
     def field(self, item):
         flds = GameTeXField.objects.filter(name=item)
@@ -64,6 +67,10 @@ class GameTeXObject(models.Model):
     def bc(cls, clname):
         return GameTeXObject.objects.filter(classes__name=clname)
 
+
+class GameTeXUser(models.Model):
+    gto = models.ForeignKey('GameTeXObject')
+    user = models.ForeignKey('GameTeXUser')
 
 # shortcut
 GTO = GameTeXObject
