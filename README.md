@@ -82,3 +82,33 @@ In case your field has spaces in it, you can reference it with the
     >>> g.field('Combat Rating')
     u'4'
 
+Updating in place
+-----------------
+
+Running `./manage.py load_gametex ...` again will update your objects in-place.
+If a macro exists, any field changes you've made in the database will be overridden, but
+new objects will be created and new fields populated as normal.  For example, if you had
+a character:
+
+    {"macro": "cTest",
+     "name": "Captain GameTeX",
+     "number": "1",
+     "Combat Rating": "2",
+    }
+
+and you updated from a JSON file that looked like this:
+
+    {"macro": "cTest",
+    "name": "Captain GameTeX",
+    "number": "100",
+    "income": "5"
+    }
+
+you'd get:
+
+    {"macro": "cTest",
+    "name": "Captain GameTeX",
+    "number": "100",
+    "income": "5",
+    "Combat Rating": "2"
+    }
