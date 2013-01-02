@@ -14,6 +14,11 @@ class Command(BaseCommand):
                     dest='clear',
                     default=False,
                     help='Delete existing GameTeX objects first.'),
+        make_option('--preserve',
+                    action='store_true',
+                    dest='preserve',
+                    default=False,
+                    help='If GameTeX data conflicts with database data, preserve the database.'),
         make_option('--create-users',
                     action='store_true',
                     dest='create-users',
@@ -41,7 +46,7 @@ class Command(BaseCommand):
             print 'That file doesn\'t exist!'
             return
 
-        import_gametex(args[0])
+        import_gametex(args[0], preserve=options['preserve'])
         if options['create-users']:
             create_users(force=options['force-create'])
         print "Done! %s fully loaded." % args[0]

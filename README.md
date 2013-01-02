@@ -88,18 +88,18 @@ Updating in place
 Running `./manage.py load_gametex ...` again will update your objects in-place.
 If a macro exists, any field changes you've made in the database will be overridden, but
 new objects will be created and new fields populated as normal.  For example, if you had
-a character:
+a character (pseudo-JSON):
 
     {"macro": "cTest",
      "name": "Captain GameTeX",
      "number": "1",
-     "Combat Rating": "2",
+     "Combat Rating": "2"
     }
 
 and you updated from a JSON file that looked like this:
 
     {"macro": "cTest",
-    "name": "Captain GameTeX",
+    "name": "Captain Achmed von GameTeX",
     "number": "100",
     "income": "5"
     }
@@ -107,8 +107,18 @@ and you updated from a JSON file that looked like this:
 you'd get:
 
     {"macro": "cTest",
-    "name": "Captain GameTeX",
+    "name": "Captain Achmed von GameTeX",
     "number": "100",
     "income": "5",
     "Combat Rating": "2"
+    }
+
+You may override this behavior by passing `--preserve` to `./manage.py load_gametex`. This
+would result in:
+
+    {"macro": "cTest",
+    "name": "Captain GameTeX",
+    "number": "1",
+    "Combat Rating": "2"
+    "income": "5",
     }

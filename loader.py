@@ -3,11 +3,13 @@ __author__ = 'ternus'
 from models import *
 import json
 
-def import_gametex(filename):
+def import_gametex(filename, preserve=False):
     """
     Import GameTeX from a file.  Assumes file exists and is sane JSON.
     """
     print "Importing GameTeX from %s." % filename
+    if preserve:
+        print "Preserving existing database values."
     gametex_file = file(filename, 'r')
     gametex_json = json.load(gametex_file)
     print "Found %d objects." % len(gametex_json)
@@ -17,7 +19,8 @@ def import_gametex(filename):
         if not g[1]:
             print "<found!> ",
         g = g[0]
-        g.name = obj['name']
+        if not (g.name and preserve):
+            g.name = obj['name']
         g.save()
         print '[',
         for cls in obj['classes']:
@@ -28,8 +31,12 @@ def import_gametex(filename):
         for field in obj:
             if field == 'macro' or field == 'name' or field == 'classes': continue
             f = GameTeXField.objects.get_or_create(name=field)[0]
-            v = GameTeXFieldValue.objects.get_or_create(field=f, object=g, value=obj[field])
-            print "%s=%s " % (field, obj[field]),
+            v = GameTeXFieldValue.objects.get_or_create(field=f, object=g)
+            if v[1] or not preserve:
+                v[0].value=obj[field]
+                print "%s=%s " % (field, obj[field]),
+            else:
+                print "%s==%s " % (field, v[0].value),
         print "} done."
     print "Done loading GameTeX objects."
 

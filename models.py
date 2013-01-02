@@ -17,7 +17,7 @@ class GameTeXField(models.Model):
 class GameTeXFieldValue(models.Model):
     field = models.ForeignKey('GameTeXField')
     object = models.ForeignKey('GameTeXObject')
-    value = models.CharField(max_length=256)
+    value = models.CharField(max_length=256, blank=True)
 
     def __unicode__(self):
         return "%s %s:%s" % (self.object, self.field, self.value)
