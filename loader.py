@@ -1,7 +1,6 @@
 __author__ = 'ternus'
 
 from models import *
-from local_settings import JSON_PRINT_FILENAME
 import json
 
 def import_gametex(filename):
@@ -18,9 +17,3 @@ def import_gametex(filename):
             f = GameTeXField.objects.get_or_create(name=field)[0]
             v = GameTeXFieldValue.objects.get_or_create(field=f, object=g, value=obj[field])
     print "Done."
-
-def run():
-    import_gametex(JSON_PRINT_FILENAME)
-
-if __name__ == '__main__':
-    run()
