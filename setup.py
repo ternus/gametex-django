@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='gametex-django',
-    version='0.3.0',
+    version='0.3.2',
     packages=find_packages(),
     author='Christian Ternus',
     author_email='ternus@cternus.net',

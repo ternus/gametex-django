@@ -1,7 +1,12 @@
+"""
+Loader commands for GameTeX-Django.
+"""
+
 from optparse import make_option
 from django.core.management import BaseCommand
 import os
-from gametex.models import GameTeXObject, GameTeXField, GameTeXFieldValue, GameTeXClass, GameTeXUser
+from gametex.models import GameTeXObject, GameTeXField, \
+                           GameTeXFieldValue, GameTeXClass, GameTeXUser
 from gametex.loader import import_gametex, create_users
 
 class Command(BaseCommand):
@@ -9,7 +14,8 @@ class Command(BaseCommand):
     Management command for GameTeX loader.
     """
     args = '<path to JSON file> [--clear] [--create-users]'
-    help = 'Load data from a GameTeX JSON file.  Updates data in-place unless --clear is passed.'
+    help = 'Load data from a GameTeX JSON file.' + \
+           'Updates data in-place unless --clear is passed.'
     option_list = BaseCommand.option_list + (
         make_option('--clear',
                     action='store_true',
@@ -20,17 +26,20 @@ class Command(BaseCommand):
                     action='store_true',
                     dest='preserve',
                     default=False,
-                    help='If GameTeX data conflicts with database data, preserve the database.'),
+                    help='If GameTeX data conflicts with database data,' + \
+                         'preserve the database.'),
         make_option('--create-users',
                     action='store_true',
                     dest='create-users',
                     default=False,
-                    help='Create Django users and GameTeXUser models for all PCs.'),
+                    help='Create Django users and ' + \
+                         'GameTeXUser models for all PCs.'),
         make_option('--force-create',
                     action='store_true',
                     dest='force-create',
                     default=False,
-                    help='Create all valid users even if invalid entries exist.'),
+                    help='Create all valid users even ' + \
+                         'if invalid entries exist.'),
         )
 
     def handle(self, *args, **options):

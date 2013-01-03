@@ -1,5 +1,9 @@
+"""
+Admin models and interface for GameTeX.
+"""
+
 from django.contrib import admin
-from models import GameTeXObject, GameTeXFieldValue, GameTeXUser
+from gametex.models import GameTeXObject, GameTeXFieldValue, GameTeXUser
 
 class CustomFieldInline(admin.TabularInline):
     """
