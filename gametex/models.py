@@ -3,6 +3,7 @@ GameTeX models.
 """
 
 from django.db import models
+from django.contrib.auth.models import User
 
 class GameTeXClass(models.Model):
     """
@@ -111,7 +112,7 @@ class GameTeXUser(models.Model):
     Mapping between Django auth users and GameTeX PCs.
     """
     gto = models.ForeignKey('GameTeXObject')
-    user = models.ForeignKey('User')
+    user = models.ForeignKey(User)
 
 # shortcut
 GTO = GameTeXObject
