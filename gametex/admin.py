@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Admin models and interface for GameTeX.
 """

@@ -1,9 +1,13 @@
+# coding=utf-8
+"""
+Setup file.
+"""
 from distutils.core import setup
 from setuptools import find_packages
 
 setup(
     name='gametex-django',
-    version='0.3.2',
+    version='0.3.5',
     packages=find_packages(),
     author='Christian Ternus',
     author_email='ternus@cternus.net',

@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Loader commands for GameTeX-Django.
 """
