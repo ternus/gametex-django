@@ -1,4 +1,6 @@
 include README.md
 include LICENSE
+include AUTHORS
+include THANKS
 include setup.py
-recursive-include *.py
+recursive-include gametex *.py
