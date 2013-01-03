@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='gametex-django',
-    version='0.2.0',
+    version='0.2.1',
     packages=['gametex','gametex.management.commands'],
     author='Christian Ternus',
     author_email='ternus@cternus.net',
