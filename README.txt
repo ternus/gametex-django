@@ -10,8 +10,7 @@ You'll need a version of GameTeX that supports JSON export (talk to Ken).
 
 To install:
 
-* Either clone the gametex-django repo where your Django apps live, or add it as a submodule.
-  Example: `git submodule add https://github.com/ternus/gametex-django.git gametex`
+* `pip install gametex-django` 
 * Add `gametex` to your INSTALLED_APPS in settings.py.
 * Run `./manage.py syncdb` to create the new models.
 
