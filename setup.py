@@ -9,5 +9,5 @@ setup(
     url='http://github.com/ternus/gametex-django',
     license='Creative Commons Attribution-Noncommercial-Share Alike license',
     description='Django integration for GameTeX',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
 )
