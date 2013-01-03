@@ -3,9 +3,11 @@ from django.core.management import BaseCommand
 import os
 from gametex.models import GameTeXObject, GameTeXField, GameTeXFieldValue, GameTeXClass, GameTeXUser
 from gametex.loader import import_gametex, create_users
-__author__ = 'cternus'
 
 class Command(BaseCommand):
+    """
+    Management command for GameTeX loader.
+    """
     args = '<path to JSON file> [--clear] [--create-users]'
     help = 'Load data from a GameTeX JSON file.  Updates data in-place unless --clear is passed.'
     option_list = BaseCommand.option_list + (
@@ -32,7 +34,9 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        print args
+        """
+        Handler for management command.
+        """
         if options['clear']:
             GameTeXFieldValue.objects.all().delete()
             GameTeXField.objects.all().delete()

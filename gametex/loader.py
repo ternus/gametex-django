@@ -6,6 +6,9 @@ import json
 def import_gametex(filename, preserve=False):
     """
     Import GameTeX from a file.  Assumes file exists and is sane JSON.
+
+    If preserve is True, when merging with existing content, prioritize
+    the database's value over the JSON file's.
     """
     print "Importing GameTeX from %s." % filename
     if preserve:
@@ -42,7 +45,9 @@ def import_gametex(filename, preserve=False):
 
 def create_users(force=False):
     """
-    Automatically Create users from GameTeX objects.
+    Automatically create users from GameTeX objects.
+    
+    If force is True, ignore errors.
     """
     print "Creating users..."
     from django.contrib.auth.models import User
