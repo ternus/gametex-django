@@ -46,6 +46,7 @@ def import_gametex(filename, preserve=False):
                                                           object = gto)
             if val[1] or not preserve:
                 val[0].value = obj[field]
+                val[0].save()
                 print "%s=%s " % (field, obj[field]),
             else:
                 print "%s==%s " % (field, val[0].value),
